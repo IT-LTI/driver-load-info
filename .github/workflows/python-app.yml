@@ -20,7 +20,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install awsebcli
-          aws configure kgrant
+          aws configure
       - name: Deploy to Elastic Beanstalk
         run: |
           eb init --region us-east-2
