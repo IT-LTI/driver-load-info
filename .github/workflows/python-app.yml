@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: 3.9
       - name: Test env vars for python
-        run: DB_SECRET_CODE=${{ secrets.DB_SECRET_PASSWORD }} python -c 'import os;print(os.environ['DB_SECRET_CODE'])
+        run: DB_SECRET_CODE=${{ secrets.DB_SECRET_PASSWORD }} python3 driver-load-info/constants.py
       - name: Install EB CLI using pip
         run: |
           python -m pip install --upgrade pip
