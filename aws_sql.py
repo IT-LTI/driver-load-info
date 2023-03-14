@@ -11,7 +11,7 @@ from constants import *
 
 
 def insert_into_bol_table(stop_id, bol_number, weight, pieces, sequence, unique_id):
-    conn = pymysql.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME, autocommit=True)
+    conn = pymysql.connect(host=DB_HOST, user=DB_USER, password='5$kaPF6m28!&', database=DB_NAME, autocommit=True)
     cursor = conn.cursor()
     sql = "INSERT INTO bol (stop_id, bol_number, weight, pieces, sequence, unique_id) VALUES (%s, %s, %s, %s, %s, %s)"
     cursor.execute(sql, (stop_id, bol_number, weight, pieces, sequence, unique_id))
