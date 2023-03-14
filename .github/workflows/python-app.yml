@@ -18,6 +18,7 @@ jobs:
           python-version: 3.9
       - name: Install EB CLI using pip
         run: |
+          eb init
           python -m pip install --upgrade pip
           pip install awsebcli
       - name: Deploy to Elastic Beanstalk
