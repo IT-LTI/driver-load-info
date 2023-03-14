@@ -22,5 +22,5 @@ jobs:
           pip install awsebcli
       - name: Deploy to Elastic Beanstalk
         run: |
-          eb init --profile default --region us-east-1 --platform "arn:aws:elasticbeanstalk:us-east-2::platform/Python 3.8 running on 64bit Amazon Linux 2"
+          eb init --profile admin --region us-east-1 --platform "arn:aws:elasticbeanstalk:us-east-2::platform/Python 3.8 running on 64bit Amazon Linux 2"
           eb deploy
