@@ -1,12 +1,13 @@
 import pymysql
-import yaml
+#import yaml
+from constants import *
 
-credentials = yaml.load(open('./credentials.yml'))
+#credentials = yaml.load(open('./credentials.yml'))
 
-DB_HOST = credentials['database']['hostname']
-DB_USER = credentials['database']['username']
-DB_PASSWORD = credentials['database']['password']
-DB_NAME = 'dli'
+#DB_HOST = credentials['database']['hostname']
+#DB_USER = credentials['database']['username']
+#DB_PASSWORD = credentials['database']['password']
+#DB_NAME = 'dli'
 
 
 def insert_into_bol_table(stop_id, bol_number, weight, pieces, sequence, unique_id):
