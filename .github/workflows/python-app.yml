@@ -9,13 +9,14 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: us-east-2
-      DB_SECRET_CODE: ${{ secrets.DB_SECRET_PASSWORD }} 
     steps:
       - uses: actions/checkout@v2
       - name: Install Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+      - name: Test env vars for python
+        run: DB_SECRET_CODE=${{ secrets.DB_SECRET_PASSWORD }} python -c 'import os;print(os.environ['DB_SECRET_CODE'])
       - name: Install EB CLI using pip
         run: |
           python -m pip install --upgrade pip
