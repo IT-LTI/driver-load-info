@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
+      AWS_ACCESS_KEY_ID: AKIATENMFFBLIOBL6IX3
+      AWS_SECRET_ACCESS_KEY: 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
+      AWS_DEFAULT_REGION: us-east-2
       DB_SECRET_CODE: ${{ secrets.DB_SECRET_PASSWORD }} 
     steps:
       - uses: actions/checkout@v2
@@ -23,5 +26,5 @@ jobs:
           aws configure
       - name: Deploy to Elastic Beanstalk
         run: |
-          eb init --region us-east-2
+          eb init
           eb deploy
