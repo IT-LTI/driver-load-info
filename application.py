@@ -18,7 +18,7 @@ def index(order_id, movement_id, stop_id, tractor_id):
             print(idx)
             unique_id = f"{stop_id}-{idx+1}"
             
-            print(DB_PASSWORD)
+            print('THIS IS THE DATABASE PASSWORD' + DB_PASSWORD)
             
             insert_into_bol_table(stop_id, bol_numbers[idx], weights[idx], pieces[idx], idx+1, unique_id)
 
