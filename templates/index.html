@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Form Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h1>Order Form</h1>
+          <form method="POST" id="order-form">
+            <div class="form-group">
+              <label for="order_id">Order ID:</label>
+              <input type="text" class="form-control" id="order_id" value={{ order_id }} readonly>
+            </div>
+            <div class="form-group">
+              <label for="movement_id">Movement ID:</label>
+              <input type="text" class="form-control" id="movement_id" value={{ movement_id }} readonly>
+            </div>
+            <div class="form-group">
+              <label for="tractor_id">Tractor ID:</label>
+              <input type="text" class="form-control" id="tractor_id" value={{  tractor_id }} readonly>
+            </div>
+            <div class="form-group">
+              <label for="trailer_id">Trailer ID:</label>
+              <input type="text" class="form-control" id="trailer_id" name="trailer_id">
+            </div>
+            <div id="bol-groups">
+              <div class="bol-group">
+                <div class="form-group">
+                  <label for="bol_number">BOL Number:</label>
+                  <input type="text" class="form-control" name="bol_number">
+                </div>
+                <div class="form-group">
+                  <label for="weight">Weight:</label>
+                  <input type="text" class="form-control" name="weight">
+                </div>
+                <div class="form-group">
+                  <label for="pieces">Pieces:</label>
+                  <input type="text" class="form-control" name="pieces">
+                </div>
+              </div>
+            </div>         
+            <button style = "background-color: orange; border-color: orange;" type="button" class="btn btn-primary" onclick="addBolGroup()">+ Add Another BoL</button>
+            <br></br>
+            <button type="submit" class="btn btn-primary" onclick="submitForm()">Submit</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function addBolGroup() {
+  const bolGroups = document.getElementById("bol-groups");
+  const clonedGroup = bolGroups.querySelector(".bol-group").cloneNode(true);
+
+  // Clear input values in the cloned group
+  const inputs = clonedGroup.querySelectorAll("input");
+  inputs.forEach(input => input.value = "");
+
+  bolGroups.appendChild(clonedGroup);
+
+  // Check if there is more than one "bol-group"
+  const groups = bolGroups.querySelectorAll(".bol-group");
+  if (groups.length > 1 && !bolGroups.nextSibling || (bolGroups.nextSibling && bolGroups.nextSibling.tagName !== "BUTTON")) {
+    // Add a button to remove the last "bol-group"
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "- Remove Last BoL";
+    removeBtn.type = "button";
+    removeBtn.className = "btn btn-danger";
+    removeBtn.onclick = removeLastBolGroup;
+    bolGroups.parentNode.insertBefore(removeBtn, bolGroups.nextSibling);
+  } else if (groups.length === 1 && bolGroups.nextSibling && bolGroups.nextSibling.tagName === "BUTTON") {
+    // Remove the button to remove the last "bol-group"
+    bolGroups.nextSibling.remove();
+  }
+}
+      
+    </script>
+    <script>
+      function submitForm() {
+        // Get the form element
+        const form = document.getElementById("order-form");
+
+        // Get all the BOL groups
+        const bolGroups = document.querySelectorAll("#bol-groups");
+
+        // Loop through the BOL groups and add their values to the form data
+        bolGroups.forEach((group, index) => {
+          const bolNumber = group.querySelector(`[name="bol_number"]`).value;
+          const weight = group.querySelector(`[name="weight"]`).value;
+          const pieces = group.querySelector(`[name="pieces"]`).value;
+
+          const bolNumberInput = document.createElement("input");
+          bolNumberInput.type = "hidden";
+          bolNumberInput.name = `bol_number_${index}`;
+          bolNumberInput.value = bolNumber;
+          form.appendChild(bolNumberInput);
+
+          const weightInput = document.createElement("input");
+          weightInput.type = "hidden";
+          weightInput.name = `weight_${index}`;
+          weightInput.value = weight;
+          form.appendChild(weightInput);
+
+          const piecesInput = document.createElement("input");
+          piecesInput.type = "hidden";
+          piecesInput.name = `pieces_${index}`;
+          piecesInput.value = pieces;
+          form.appendChild(piecesInput);
+        });
+
+        // Submit the form
+        form.submit();
+      }
+    </script>
+    <script>
+function removeLastBolGroup() {
+  const bolGroups = document.getElementById("bol-groups");
+  const groups = bolGroups.querySelectorAll(".bol-group");
+  if (groups.length > 1) {
+    bolGroups.removeChild(groups[groups.length - 1]);
+    // Remove the button to remove the last "bol-group" if there is only one left
+    if (groups.length === 2) {
+      const removeBtn = bolGroups.nextSibling;
+      if (removeBtn && removeBtn.classList.contains("btn-danger")) {
+        removeBtn.remove();
+      }
+    }
+  }
+}
+    </script>
+  </body>
+</html>
