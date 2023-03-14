@@ -27,5 +27,5 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Deploy to Elastic Beanstalk
         run: |
-          eb init --region us-east-2 --application driver-load-info
+          eb init --region us-east-2 driver-load-info
           eb deploy
