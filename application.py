@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from aws_sql import *
-
+from constants import *
 
 application = Flask(__name__)
 
@@ -17,6 +17,8 @@ def index(order_id, movement_id, stop_id, tractor_id):
         for idx, bol_number in enumerate(bol_numbers):
             print(idx)
             unique_id = f"{stop_id}-{idx+1}"
+            
+            print(DB_PASSWORD)
             
             insert_into_bol_table(stop_id, bol_numbers[idx], weights[idx], pieces[idx], idx+1, unique_id)
 
