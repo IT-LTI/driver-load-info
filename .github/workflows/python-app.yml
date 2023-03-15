@@ -23,9 +23,7 @@ jobs:
           pip install --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org awsebcli
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          python3 constants.py
-        env:
-          DB_SECRET_CODE: ${{ secrets.DB_SECRET_PASSWORD }}
+          echo "export DB_SECRET_CODE=${{ secrets.DB_SECRET_PASSWORD }}" >> $GITHUB_ENV python3 constants.py
       - name: Deploy to Elastic Beanstalk
         run: |
           eb init --region us-east-2  driver-load-info --platform "Python 3.8 running on 64bit Amazon Linux 2"
