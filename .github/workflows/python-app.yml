@@ -27,4 +27,3 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         run: |
           eb init --region us-east-2  driver-load-info --platform "Python 3.8 running on 64bit Amazon Linux 2"
-          
